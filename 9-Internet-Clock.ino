@@ -21,11 +21,11 @@
 #include <WiFiUdp.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_PCD8544.h>
+// set your SSID and PASSWORD here
+const char *ssid     = "";
+const char *password = "";
 
-const char *ssid     = "Jazz-LTE-DBB3";
-const char *password = "48456841";
-
-const int8_t RST_PIN = D1;
+const int8_t RST_PIN = D1;                                                                //defining LCD Pins
 const int8_t CE_PIN = D2;
 const int8_t DC_PIN = D0;
 Adafruit_PCD8544 display = Adafruit_PCD8544(DC_PIN, CE_PIN, RST_PIN);
@@ -33,7 +33,7 @@ int GMT = 5;
 int DAY, MONTH, YEAR, Seconds, Hours;
 long int time_now;
 WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP);
+NTPClient timeClient(ntpUDP);                                     //time library object
 
 void setup() {
   Serial.begin(115200);
@@ -41,7 +41,7 @@ void setup() {
   WiFi.begin(ssid, password);
 
   display.begin();
-  display.setContrast(40);              // Adjust for your display
+  display.setContrast(40);                                         // Adjust for your display
 
   display.clearDisplay();
   display.setTextSize(2);
@@ -64,7 +64,7 @@ void setup() {
 
 void loop() {
   timeClient.update();
-  time_now = timeClient.getEpochTime() + 18000 ;
+  time_now = timeClient.getEpochTime() + (GMT * 3600) ;                        //GMT HOUR TO SECONDS
   DAY = day(time_now);
   MONTH = month(time_now);
   YEAR = year(time_now);
@@ -77,7 +77,7 @@ void loop() {
   delay(1000);
 
 }
-
+//function to display time and date at LCD
 void LCD_DISPLAY(String DAY, String MONTH, String YEAR)
 {
   display.clearDisplay();
@@ -106,6 +106,6 @@ void LCD_DISPLAY(String DAY, String MONTH, String YEAR)
   display.setTextSize(1);
   display.setTextColor(BLACK);
   display.setCursor(15, 35);
-  display.println(DAY + ":" + MONTH + ":" + YEAR);
+  display.println(DAY + ":" + MONTH + ":" + YEAR);                //display date
 
 }
