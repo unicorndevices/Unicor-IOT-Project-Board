@@ -21,7 +21,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_PCD8544.h>
 
-const int8_t  RST_PIN = D1;
+const int8_t  RST_PIN = D1;                                     //defining LCD Pins
 const int8_t  CE_PIN = D2;
 const int8_t  DC_PIN = D0;
 
@@ -32,12 +32,12 @@ Adafruit_PCD8544 display = Adafruit_PCD8544(DC_PIN, CE_PIN, RST_PIN);
 #pragma message(THIS EXAMPLE IS FOR ESP8266 ONLY!)
 #error Select ESP8266 board.
 #endif
-int Sensor_PIN  = 0;
-int relay1_Pin     = 3;
-int relay2_Pin     = 1;
+int Sensor_PIN      = 0;                      //sensor 2 field at IOT board
+int relay1_Pin      = 3;                      //for temperature threshold 
+int relay2_Pin      = 1;                      //for humidity threshold
 /*Put your SSID & Password*/
-const char* ssid = "Jazz-LTE-DBB3";  // Enter SSID here
-const char* password = "48456841";  //Enter Password here
+const char* ssid = "";                       // Enter SSID here
+const char* password = "";                   //Enter Password here
 String local_IPaddress;
 DHTesp dht;
 
@@ -58,10 +58,10 @@ void setup() {
   pinMode(relay2_Pin, OUTPUT);
   digitalWrite(relay2_Pin, LOW);
 
-  dht.setup(Sensor_PIN, DHTesp::DHT11);
+  dht.setup(Sensor_PIN, DHTesp::DHT11);                                //defien DHT sensor type
 
   display.begin();
-  display.setContrast(40);  // Adjust for your display
+  display.setContrast(40);                                             // Adjust for your display
 
   display.clearDisplay();
   display.setTextSize(1);
