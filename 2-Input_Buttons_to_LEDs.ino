@@ -2,10 +2,14 @@
 /*//////////////////////////////////////////////////// 
 ///       UNICORN IOT PROJECT BOARD    ///////////////
 //////////////////////////////////////////////////////
-//////   LED Blinking ///////////////// 
+//////   Input Buttons to LEDs ///////////////// 
  /* Steps:
- * 1: Upload code
- * 2: check LED 1, LED 2 and Built in LED on NODEMCU blinking with the delay of 1 sec 
+  1: Upload code
+  2.	Press BT1 and check LED1 state.
+  3.	Press BT2 and check LED2 state.
+  4.	Place R1, R2 and BZ jumpers to enable relay 1, relay 2 and buzzer respectively.
+  5.	Connect any load with relay 1 or relay 2 and control it with buttons.
+
  *
   */
  //////////////////////////////////////////////////////////////////////////////////////
